@@ -80,7 +80,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// 🔥 CORS (مفتوح مؤقتًا عشان الديبلوي)
+//  CORS (مفتوح مؤقتًا عشان الديبلوي)
 builder.Services.AddCors(o => o.AddPolicy("Front", p =>
     p.AllowAnyOrigin()
      .AllowAnyHeader()
@@ -94,7 +94,7 @@ Directory.CreateDirectory(Path.Combine(app.Environment.ContentRootPath, "wwwroot
 // Middleware
 app.UseMiddleware<ExceptionMiddleware>();
 
-// 🔥 شغل Swagger في Production
+//  شغل Swagger في Production
 app.UseSwagger();
 app.UseSwaggerUI();
 
