@@ -12,6 +12,14 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    options.ListenAnyIP(int.Parse(port));
+});
+
+
 builder.Services.Configure<FormOptions>(o =>
 {
     o.MultipartBodyLengthLimit = 6 * 1024 * 1024;
@@ -20,8 +28,12 @@ builder.Services.Configure<FormOptions>(o =>
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
+
+// Validation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -46,8 +58,10 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// JWT
 var jwt = builder.Configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>() ?? new JwtOptions();
 var key = Encoding.UTF8.GetBytes(jwt.Key);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
     {
@@ -63,31 +77,39 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             NameClaimType = System.Security.Claims.ClaimTypes.NameIdentifier,
         };
     });
+
 builder.Services.AddAuthorization();
 
+// 🔥 CORS (مفتوح مؤقتًا عشان الديبلوي)
 builder.Services.AddCors(o => o.AddPolicy("Front", p =>
-    p.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5174", "http://127.0.0.1:5174")
-        .AllowAnyHeader()
-        .AllowAnyMethod()));
+    p.AllowAnyOrigin()
+     .AllowAnyHeader()
+     .AllowAnyMethod()));
 
 var app = builder.Build();
 
+// إنشاء فولدر uploads
 Directory.CreateDirectory(Path.Combine(app.Environment.ContentRootPath, "wwwroot", "uploads"));
 
+// Middleware
 app.UseMiddleware<ExceptionMiddleware>();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+// 🔥 شغل Swagger في Production
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
 app.UseCors("Front");
+
 app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
+// Seed Data
 await DatabaseSeeder.SeedAsync(app.Services, app.Logger);
 
 app.Run();
