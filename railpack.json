@@ -1,7 +1,0 @@
-{
-  "$schema": "https://schema.railpack.com",
-  "provider": "dotnet",
-  "deploy": {
-    "startCommand": "dotnet src/ECommerce.API/bin/Release/net8.0/publish/ECommerce.API.dll"
-  }
-}
