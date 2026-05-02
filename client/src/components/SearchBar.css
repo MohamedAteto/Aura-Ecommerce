@@ -1,0 +1,35 @@
+.searchbar { position: relative; width: 100%; }
+.searchbar__input-wrap {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--input-bg);
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  padding: 0.55rem 0.85rem;
+  transition: border-color 0.2s;
+}
+.searchbar__input-wrap:focus-within { border-color: var(--accent-hot); }
+.searchbar__icon { color: var(--muted); flex-shrink: 0; }
+.searchbar__input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font-size: 0.9rem; font-family: inherit;
+}
+.searchbar__input::placeholder { color: var(--muted); }
+.searchbar__clear { background: none; border: none; cursor: pointer; color: var(--muted); padding: 0; display: flex; }
+.searchbar__clear:hover { color: var(--text); }
+.searchbar__dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-bright);
+  border-radius: 0.65rem;
+  list-style: none; padding: 0.35rem; margin: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+.searchbar__suggestion {
+  display: flex; align-items: center; gap: 0.5rem;
+  width: 100%; background: none; border: none; cursor: pointer;
+  color: var(--text); font-size: 0.88rem; font-family: inherit;
+  padding: 0.55rem 0.75rem; border-radius: 0.45rem;
+  text-align: left; transition: background 0.15s;
+}
+.searchbar__suggestion:hover { background: var(--card-hover); }

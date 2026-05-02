@@ -1,0 +1,48 @@
+.shop-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .shop-layout { grid-template-columns: 240px 1fr; }
+}
+
+.shop-filters {
+  display: flex; flex-direction: column; gap: 1rem;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1.25rem;
+  position: sticky; top: 80px;
+}
+
+.shop-price-range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.shop-price-range .input { flex: 1; min-width: 0; }
+.shop-price-range__sep {
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+  padding: 0.35rem 0.75rem; border-radius: 999px;
+  background: var(--bg-elev); border: 1px solid var(--line);
+  color: var(--muted); font-size: 0.8rem; cursor: pointer;
+  transition: all 0.15s;
+}
+.shop-rating-btn:hover { border-color: var(--accent-hot); color: var(--text); }
+.shop-rating-btn--active { background: color-mix(in srgb, var(--accent-hot) 20%, transparent); border-color: var(--accent-hot); color: var(--accent-hot); }
+
+.grid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.pagination {
+  display: flex; align-items: center; gap: 1rem;
+  justify-content: center; margin-top: 2rem;
+}
+.pagination__meta { font-size: 0.85rem; color: var(--muted); }

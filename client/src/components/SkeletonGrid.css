@@ -1,0 +1,23 @@
+.sk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.sk-card {
+  border-radius: var(--radius);
+  height: 300px;
+  background: linear-gradient(90deg, var(--line) 0%, var(--card) 50%, var(--line) 100%);
+  background-size: 200% 100%;
+  animation: sk 1.2s ease-in-out infinite;
+  border: 1px solid var(--line);
+}
+
+@keyframes sk {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

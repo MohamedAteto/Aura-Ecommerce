@@ -1,0 +1,55 @@
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg);
+}
+
+.app-bg::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(ellipse 80% 50% at 15% -10%, color-mix(in srgb, var(--accent-hot) 22%, transparent), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 95% 10%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, color-mix(in srgb, var(--accent-3) 10%, transparent), transparent 45%);
+  animation: mesh-shift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.app-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@keyframes mesh-shift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(2%, 3%) scale(1.05);
+  }
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+}
+
+.page {
+  min-height: 50vh;
+}

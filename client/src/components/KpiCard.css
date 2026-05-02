@@ -1,0 +1,20 @@
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: default;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.kpi-card:hover { border-color: var(--line-bright); box-shadow: var(--shadow-sm); }
+.kpi-card__icon {
+  width: 48px; height: 48px; border-radius: 0.75rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.kpi-card__label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+.kpi-card__value { font-size: 1.6rem; font-weight: 700; color: var(--text); font-family: var(--font-display); }
+.kpi-card__trend { font-size: 0.78rem; color: #4ade80; margin-top: 0.2rem; }
