@@ -4,16 +4,16 @@ obj/
 *.user
 *.suo
 .vs/
+appsettings.Development.json
 *.log
+publish_output/
+aura-api.zip
 
 # Node
 client/node_modules/
 client/dist/
 client/.env.local
 client/.env
-
-# Secrets
-appsettings.Development.json
 
 # OS
 .DS_Store
